@@ -1,5 +1,7 @@
 package com.logic;
 
+import com.util.Factorial;
+
 import java.util.ArrayList;
 
 public class Back extends InterpolationNewton {
@@ -15,18 +17,24 @@ public class Back extends InterpolationNewton {
     }
 
     @Override
-    void countDelta() {
-
-    }
-
-    @Override
     void setA() {
-
+        a.add(delta_y.get(0).get(n));
+        for (int i = 1; i <= n ; i++) {
+            a.add(delta_y.get(i).get(n - i) / (Factorial.take(i) * Math.pow(h, i)));
+        }
     }
 
     @Override
     public double p(double x) {
         super.p(x);
-        return 0;
+        double p = 0;
+        for (int i = 0; i < n; i++) {
+            double mem = a.get(i);
+            for (int j = n; j > n - i; j--) {
+                mem *= (x - this.x[j]);
+            }
+            p += mem;
+        }
+        return p;
     }
 }

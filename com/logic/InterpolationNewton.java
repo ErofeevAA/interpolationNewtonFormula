@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public abstract class InterpolationNewton {
 
     double[] x;
-    ArrayList<Double> y;
+    private ArrayList<Double> y;
     int n;
 
     double h;
@@ -32,7 +32,18 @@ public abstract class InterpolationNewton {
         setA();
     }
 
-    abstract void countDelta();
+    private void countDelta() {
+        delta_y.add(y);
+        for (int i = 1; i < y.size(); i++) {
+            delta_y.add(new ArrayList<>());
+            for (int j = 1; j <= y.size() - i; j++) {
+                delta_y.get(i).add(delta_y.get(i - 1).get(j) - (delta_y.get(i - 1).get(j - 1)));
+
+                delta_y.get(i).set(j - 1, delta_y.get(i).get(j - 1));
+            }
+        }
+    }
+
     abstract void setA();
 
     public abstract String getKey();

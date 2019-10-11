@@ -40,7 +40,7 @@ public class Window extends JFrame {
 
     private XYSeries getSeries(InterpolationNewton newton) {
         XYSeries res = new XYSeries(newton.getKey());
-        for (double i = -5; i < 5; i+=0.1) {
+        for (double i = -500; i < 500; i+=1.0) {
             res.add(i, newton.p(i));
         }
         return res;
@@ -49,13 +49,16 @@ public class Window extends JFrame {
     private void draw(){
         XYSeriesCollection collection = new XYSeriesCollection();
         collection.addSeries(getSeries(forward));
+        collection.addSeries(getSeries(back));
 
         JFreeChart chart = ChartFactory
                 .createXYLineChart("Result", "x", "y",
                         collection,
                         PlotOrientation.VERTICAL,
-                        true, false, false);
-        add(new ChartPanel(chart));
+                        true, true, false);
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setSize(700, 400);
+        add(chartPanel);
     }
 
     private void initVariables() {
