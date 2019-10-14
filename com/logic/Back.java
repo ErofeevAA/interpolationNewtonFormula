@@ -13,11 +13,11 @@ public class Back extends InterpolationNewton {
 
     public Back() {
         delta_y = new ArrayList<>();
-        a = new ArrayList<>();
     }
 
     @Override
     void setA() {
+        super.setA();
         a.add(delta_y.get(0).get(n));
         for (int i = 1; i <= n ; i++) {
             a.add(delta_y.get(i).get(n - i) / (Factorial.take(i) * Math.pow(h, i)));
@@ -28,10 +28,11 @@ public class Back extends InterpolationNewton {
     public double p(double x) {
         super.p(x);
         double p = 0;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i <= n; i++) {
             double mem = a.get(i);
             for (int j = n; j > n - i; j--) {
-                mem *= (x - this.x[j]);
+                double dx = (x - this.x[j]);
+                mem *= dx;
             }
             p += mem;
         }

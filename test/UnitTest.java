@@ -13,35 +13,34 @@ public class UnitTest {
 
     @Test
     public void takeFactorial() {
-        assertEquals(1, Factorial.take(1));
         assertEquals(24, Factorial.take(4));
     }
 
     @Test
     public void takePolynomialForward() {
         Forward forward = new Forward();
-        forward.setX(new double[]{300, 400, 500, 600});
+        forward.setX(new double[]{-2, -1, 0, 1});
         ArrayList<Double> y = new ArrayList<>();
-        y.add(52.88);
-        y.add(65.61);
-        y.add(78.07);
-        y.add(99.24);
+        y.add(4.0);
+        y.add(1.0);
+        y.add(0.0);
+        y.add(1.0);
         forward.setY(y);
         forward.setN(3);
-        assertEquals((int) 71.13, (int) forward.p(450));
+        assertEquals((int) 4.0, (int) forward.p(2));
     }
 
     @Test
     public void takePolynomialBack() {
         Back back = new Back();
-        back.setX(new double[]{300, 400, 500, 600});
+        back.setX(new double[]{-2, -1, 0, 1});
         ArrayList<Double> y = new ArrayList<>();
-        y.add(52.88);
-        y.add(65.61);
-        y.add(78.07);
-        y.add(99.24);
+        y.add(4.0);
+        y.add(1.0);
+        y.add(0.0);
+        y.add(1.0);
         back.setY(y);
         back.setN(3);
-        assertEquals((int) 87.01, (int) back.p(550));
+        assertEquals((int) 4.0, (int) back.p(2));
     }
 }

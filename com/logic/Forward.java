@@ -18,7 +18,7 @@ public class Forward extends InterpolationNewton {
 
     @Override
     void setA() {
-        a = new ArrayList<>();
+        super.setA();
         a.add(delta_y.get(0).get(0));
         for (int i = 1; i <= n; i++) {
             a.add(delta_y.get(i).get(0));
@@ -30,7 +30,7 @@ public class Forward extends InterpolationNewton {
     public double p(double x) {
         super.p(x);
         double p = 0;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i <= n; i++) {
             double mem = a.get(i);
             for (int j = 0; j < i; j++) {
                 mem *= (x - this.x[j]);

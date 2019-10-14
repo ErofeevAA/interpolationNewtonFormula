@@ -7,6 +7,7 @@ public abstract class InterpolationNewton {
 
     double[] x;
     private ArrayList<Double> y;
+
     int n;
 
     double h;
@@ -44,7 +45,9 @@ public abstract class InterpolationNewton {
         }
     }
 
-    abstract void setA();
+    void setA() {
+        a = new ArrayList<>();
+    }
 
     public abstract String getKey();
 
